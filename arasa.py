@@ -1,12 +1,13 @@
 """
-1次元CNN
+表面粗さ用
+CNNとGANを用いたハイブリット学習
 
 """
 
 import keras
 import numpy as np
 import matplotlib.pyplot as plt
-from keras.layers import Input, Conv1D, MaxPooling1D, Average, Concatenate, Flatten, Dense, BatchNormalization
+from keras.layers import Input, Conv1D,  Flatten, Dense
 from keras.models import Model
 from keras.constraints import non_neg
 from keras.optimizers import Adam
