@@ -4,6 +4,7 @@ CNNとGANを用いたハイブリット学習
 
 """
 
+
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.layers import Input, Conv1D, Flatten, Dense
@@ -31,7 +32,7 @@ for i in range(300):
     #データの高さ調整
     rand3 = np.random.randint(-100,100)
     #noise
-    rand4 = np.random.randn(400)
+    rand4 = np.random.randn(400)/10
     
     dataset[step,:rand1] = 0
     num = np.arange(150)
@@ -56,7 +57,7 @@ for i in range(300):
     #データの高さ調整
     rand3 = np.random.randint(-25,25)
     #noise
-    rand4 = np.random.randn(400)
+    rand4 = np.random.randn(400)/10
     
     dataset[step,:rand1] = 0
     num = np.ones(150)
@@ -83,7 +84,7 @@ for i in range(300):
     #spikeの高さ調整
     rand3 = np.random.randint(-100,100,3)
     #noise
-    rand4 = np.random.randn(400)
+    rand4 = np.random.randn(400)/10
     
     if np.random.rand() > 0.5:
         noise_data[step,100] = rand3[0]
@@ -167,7 +168,7 @@ combine.compile(loss='binary_crossentropy', optimizer=optimizer)
 #===========================================================
 #train
 
-epochs = 1000
+epochs = 100
 true = np.ones((1,20))
 fake = np.zeros((1,20))
 k = 0
@@ -181,8 +182,12 @@ for epoch in range(epochs):
     discriminator_loss = 0
     for i in range(900):
         
-        train = noise_data[i,:]#.reashape(1,400,1)
-        target = dataset[i,40:360]#.reshape(1,320,1)
+        rand_num = np.arange(900)
+        np.random.shuffle(rand_num)
+        m = rand_num[i]
+        
+        train = noise_data[m,:]#.reashape(1,400,1)
+        target = dataset[m,40:360]#.reshape(1,320,1)
         train = train.reshape(1,400,1)
         target = target.reshape(1,320,1)
         
@@ -204,7 +209,7 @@ for epoch in range(epochs):
         print("d_loss:", discriminator_loss)
     
     
-    if (epoch%10) == 0:
+    if (epoch%1) == 0:
         
         fig = plt.figure()
         ax_1 = fig.add_subplot(221)
