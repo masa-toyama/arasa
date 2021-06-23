@@ -2,9 +2,7 @@
 """
 β-γ拡張
 20210623-toyama
-
 Created on Wed Jun 23 17:32:40 2021
-
 @author: user01
 """
 
@@ -15,11 +13,17 @@ import matplotlib.pyplot as plt
 
 #--------------------
 #import data
-inputs = np.loadtxt("inputs_data.csv", delimiter=",")
+#inputs = np.loadtxt("inputs_data.csv", delimiter=",")
+#
+#plt.plot(inputs)
+#plt.show()
 
+data = np.arange(200)
+inputs = np.sin(np.pi/100*data)*60 #+ np.random.rand(200)*10 - 5
 plt.plot(inputs)
 plt.show()
-
+print(inputs[0])
+print(np.sin(np.pi/100*201)*60)
 
 
 
@@ -27,6 +31,7 @@ plt.show()
 #parameters
 
 r = int(len(inputs)/10)
+print("r", r)
 
 if r >= len(inputs):
     print("Error")
