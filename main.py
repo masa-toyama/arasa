@@ -11,8 +11,9 @@ import matplotlib.pyplot as plt
 from fmsf_function import fmsf
 from ft_fmsf_function import ft_fmsf
 
-
-nyuryoku = np.loadtxt("inputs/takahashi.csv", delimiter=",")
+#input data is the first row
+#sf output is the second row
+nyuryoku = np.loadtxt("inputs/input.csv", delimiter=",")
 inputs = nyuryoku[:,0]
 sf = nyuryoku[:,1]
 
