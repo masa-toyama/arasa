@@ -19,9 +19,12 @@ def ft_fmsf(inputs_, b=0, rr=0):
     
     #--------------------------------------------
     #パラメーター
-    
+   
+    # m 基本幅
     m =21
     m3 = m + (m-1)*2
+    
+    # z 離散化幅
     z = 100
     z_ = z + m3
     
@@ -112,7 +115,7 @@ def ft_fmsf(inputs_, b=0, rr=0):
     # # plt.plot(sf)
     # # plt.show()
     
-    #3次スプライン
+    #3次スプライン（SF)
     l = len(inputs)
     ft_sf = np.zeros(l)
     for i in range(l):
