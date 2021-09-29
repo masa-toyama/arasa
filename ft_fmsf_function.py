@@ -119,7 +119,7 @@ def ft_fmsf(inputs_, b=0, rr=0):
     l = len(inputs)
     ft_sf = np.zeros(l)
     for i in range(l):
-        ft_sf[i] = (1 + (np.sin(np.pi*i/l) / np.sin(np.pi*5/l))**(2*2))**(-1)
+        ft_sf[i] = (1 + (np.sin(np.pi*i/l) / np.sin(np.pi*5/len(inputs_)))**(2*2))**(-1)
     
     plt.plot(ft_sf, label="ft_sf")
     plt.legend()
