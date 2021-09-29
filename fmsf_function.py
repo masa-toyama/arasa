@@ -21,9 +21,9 @@ def fmsf(inputs_, b=0, rr=0):
     #--------------------------------------------
     #パラメーター
     
-    m = 21
+    m = 19
     m3 = m + (m-1)*2
-    z = 50
+    z = 100
     z_ = z + m3
     filter_size = 5 #これだと5λc
     
@@ -63,9 +63,6 @@ def fmsf(inputs_, b=0, rr=0):
     bs[m3//2+1:] = bs1[z_-m3//2:]
     bs = np.fft.fftshift(bs)
     
-    # plt.plot(bs, label="s_spline")
-    # plt.legend()
-    # plt.show()
     
     
     
@@ -76,10 +73,6 @@ def fmsf(inputs_, b=0, rr=0):
     inputs, kk = b_r(inputs_, k=len(inputs_)/5*filter_size/2, b=b, rr=rr)
     len_x = len(inputs)
     
-    plt.plot(inputs, label="β-γ")
-    plt.legend()
-    plt.show()
-    
     
     
     
@@ -89,7 +82,7 @@ def fmsf(inputs_, b=0, rr=0):
     
     sf_y = int(len(inputs_) / 5 * filter_size) + 1 #5λc
     sf_x = (int)((sf_y-1)/2 + 1)
-    ramuda = (sf_y-1)/5
+    ramuda = (sf_y-1)/5/(filter_size/5)
     sf = np.zeros(sf_y)
     omomi = 0
     
@@ -117,9 +110,9 @@ def fmsf(inputs_, b=0, rr=0):
            
     
     sf = np.fft.fftshift(sf)
-    # plt.plot(sf, label="SF")
-    # plt.legend()
-    # plt.show()
+    plt.plot(sf, label="SF")
+    plt.legend()
+    plt.show()
     
     
     
@@ -132,6 +125,8 @@ def fmsf(inputs_, b=0, rr=0):
     z_data = np.zeros((z_,len(inputs)))
     max_data = max(inputs)
     min_data = min(inputs)
+    # max_data = 9
+    # min_data = 0
     step = (max_data - min_data) / z
     inputs_after = inputs - min_data + step/2
     
@@ -188,6 +183,7 @@ def fmsf(inputs_, b=0, rr=0):
     max_num = np.zeros(len(inputs_), dtype=np.int)
     fmsf_p = np.zeros(len(inputs_), dtype=np.float64)
     
+    
     for i in range(len(fmsf_risan[0,:])):
         max_num[i] = int(fmsf_risan[:,i].argmax())
         
@@ -207,19 +203,6 @@ def fmsf(inputs_, b=0, rr=0):
     inputs = inputs[kk:kk+len(inputs_)]
     
     
-    
-    # plt.plot(inputs)
-    # plt.plot(zz, label="real")
-    # #plt.plot(fmsf, label="fmsf")
-    # plt.legend()
-    # plt.show()
-    
-    
-    # gosa = (zz - fmsf)# / (max_data - min_data)
-    
-    # plt.plot(gosa[30:170], label="pv")
-    # plt.legend()
-    # plt.show()
     
     
     return zz
